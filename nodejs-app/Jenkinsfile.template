@@ -4,13 +4,7 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '2'))
     skipDefaultCheckout true
   }
-  post {
-    aborted {
-      echo "Why didn't you push my button?"
-    }
-  }
   stages {
-  
     stage('Test') {
       agent { label 'nodejs-app' }
       steps {
@@ -21,15 +15,13 @@ pipeline {
         }
       }
     }
-    
     stage('Build and Push Image') {
-      agent any
       when {
-        beforeAgent true
-        branch 'master'
+         beforeAgent true
+         branch 'master'
       }
       steps {
-        echo "TODO - build and push image"
+         echo "TODO - build and push image"
       }
       post {
         success {
@@ -37,7 +29,6 @@ pipeline {
         }
       }
     }
-    
     stage('Deploy') {
       when {
         beforeAgent true
@@ -54,6 +45,5 @@ pipeline {
         echo "Continuing with deployment - approved by ${APPROVER}"
       }
     }   
-    
   }
 }
