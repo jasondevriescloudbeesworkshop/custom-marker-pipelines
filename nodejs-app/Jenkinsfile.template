@@ -17,7 +17,7 @@ metadata:
 spec:
   containers:
   - name: nodejs
-    node:10.10.0-alpine
+    image: node:10.10.0-alpine
     command:
     - cat
     tty: true
