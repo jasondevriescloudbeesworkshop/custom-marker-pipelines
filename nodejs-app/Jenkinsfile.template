@@ -23,12 +23,18 @@ pipeline {
     }
     
     stage('Build and Push Image') {
+      agent any
       when {
         beforeAgent true
         branch 'master'
       }
       steps {
         echo "TODO - build and push image"
+      }
+      post {
+        success {
+          slackSend "${JOB_NAME} pipeline job is awaiting approval at: ${RUN_DISPLAY_URL}"
+        }
       }
     }
     
